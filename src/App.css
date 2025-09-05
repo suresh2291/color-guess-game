@@ -1,0 +1,572 @@
+.app {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.header h1 {
+  color: #333;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.language-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.language-buttons button {
+  padding: 8px 16px;
+  border: 2px solid #667eea;
+  background: white;
+  color: #667eea;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.language-buttons button.active {
+  background: #667eea;
+  color: white;
+}
+
+.language-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.score {
+  color: #4CAF50;
+}
+
+.timer {
+  color: #FF6B6B;
+}
+
+.message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px 40px;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  z-index: 1000;
+  animation: fadeInOut 1s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.instructions {
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.game-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  min-height: 300px;
+  background: #f8f9fa;
+  border-radius: 15px;
+  padding: 20px;
+  border: 3px solid #333;
+}
+
+.drop-zone {
+  flex: 1;
+  min-height: 200px;
+  border: 4px dashed #ccc;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.drop-zone.red {
+  background: linear-gradient(135deg, #ffebee, #ffcdd2);
+  border-color: #f44336;
+}
+
+.drop-zone.blue {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  border-color: #2196f3;
+}
+
+.drop-zone.hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.zone-label {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.middle-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  position: relative;
+}
+
+.placeholder {
+  font-size: 1.2rem;
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}
+
+.color-item {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  cursor: grab;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.color-item:active {
+  cursor: grabbing;
+}
+
+.color-item.red {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+}
+
+.color-item.blue {
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+}
+
+.color-item.dragging {
+  transform: rotate(10deg) scale(1.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.start-button {
+  padding: 20px 40px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.start-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.game-over {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  text-align: center;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.game-over h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.game-over p {
+  color: #666;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+.play-again-button {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #FF9800, #F57C00);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.play-again-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile Touch Optimization */
+* {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Enhanced touch targets */
+.color-item {
+  touch-action: none;
+  -webkit-user-drag: element;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.drop-zone {
+  touch-action: none;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Mobile-specific button styles */
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+/* Improved mobile drag feedback */
+.color-item.dragging {
+  transform: rotate(5deg) scale(1.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+.drop-zone.hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-width: 6px;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px; /* Prevent zoom on iOS */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+
+  .app {
+    padding: 10px;
+    margin: 5px;
+    min-height: 100vh;
+    width: calc(100vw - 10px);
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .language-buttons {
+    justify-content: center;
+  }
+
+  .language-buttons button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    min-height: 44px; /* iOS touch target minimum */
+    min-width: 44px;
+  }
+  
+  .instructions {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+
+  .instructions h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .instructions p {
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .game-info {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+  
+  .game-container {
+    flex-direction: column;
+    gap: 20px;
+    min-height: 500px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .drop-zone {
+    min-height: 120px;
+    height: 120px;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    border-width: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .zone-label {
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .middle-area {
+    min-height: 150px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .middle-area p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .color-item {
+    width: 100px;
+    height: 100px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    cursor: grab;
+    touch-action: none;
+    -webkit-user-drag: element;
+  }
+
+  .color-item:active {
+    cursor: grabbing;
+  }
+
+  .placeholder {
+    font-size: 1.1rem;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+  }
+
+  .start-button, .play-again-button {
+    padding: 18px 40px;
+    font-size: 1.3rem;
+    min-height: 56px; /* Better touch target */
+    margin: 20px auto;
+    display: block;
+    width: auto;
+    max-width: 280px;
+  }
+
+  .game-over {
+    padding: 30px 20px;
+    margin: 20px;
+    width: calc(100vw - 40px);
+    max-width: 350px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50%;
+    margin-top: -100px;
+  }
+
+  .game-over h2 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+  }
+
+  .game-over p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+
+  .message {
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    max-width: 280px;
+    width: auto;
+    white-space: nowrap;
+  }
+}
+
+/* Extra small screens (phones in portrait) */
+@media (max-width: 480px) {
+  .app {
+    padding: 8px;
+    margin: 2px;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .game-container {
+    gap: 15px;
+    min-height: 450px;
+    padding: 10px;
+  }
+
+  .drop-zone {
+    min-height: 100px;
+    height: 100px;
+  }
+
+  .zone-label {
+    font-size: 1.1rem;
+  }
+
+  .color-item {
+    width: 80px;
+    height: 80px;
+    font-size: 1.1rem;
+  }
+
+  .middle-area {
+    min-height: 130px;
+    padding: 15px;
+  }
+
+  .instructions {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .instructions h3 {
+    font-size: 1.1rem;
+  }
+
+  .game-info {
+    font-size: 1rem;
+    padding: 8px 12px;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .game-container {
+    flex-direction: row;
+    min-height: 200px;
+    gap: 15px;
+  }
+
+  .drop-zone {
+    min-height: 150px;
+    height: 150px;
+    flex: 1;
+  }
+
+  .middle-area {
+    min-height: 150px;
+    flex: 1;
+  }
+
+  .color-item {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .color-item {
+    border-width: 2px;
+  }
+  
+  .drop-zone {
+    border-width: 3px;
+  }
+}
