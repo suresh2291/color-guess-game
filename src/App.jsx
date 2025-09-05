@@ -21,12 +21,31 @@ const ColorItem = ({ color }) => {
 
   console.log('🎨 ColorItem: isDragging =', isDragging, 'color =', color);
 
+  // Touch event handlers for mobile
+  const handleTouchStart = (e) => {
+    console.log('🎨 ColorItem: Touch start on', color);
+    e.preventDefault(); // Prevent scrolling
+  };
+
+  const handleTouchEnd = (e) => {
+    console.log('🎨 ColorItem: Touch end on', color);
+    e.preventDefault();
+  };
+
+  const handleTouchMove = (e) => {
+    console.log('🎨 ColorItem: Touch move on', color);
+    e.preventDefault(); // Prevent scrolling during drag
+  };
+
   return (
     <div
       ref={drag}
       className={`color-item ${color}`}
       style={{ opacity: isDragging ? 0.5 : 1 }}
       onMouseDown={() => console.log('🎨 ColorItem: Mouse down on', color)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onTouchMove={handleTouchMove}
     >
       {color.toUpperCase()}
     </div>
@@ -161,7 +180,7 @@ function App() {
       console.log('✅ handleCorrectDrop: New score =', newScore);
       return newScore;
     });
-    showFeedback('Correct! +10');
+    showFeedback(t('correct'));
     console.log('✅ handleCorrectDrop: Generating new random color...');
     generateRandomColor();
     console.log('✅ handleCorrectDrop: Done!');
@@ -176,7 +195,7 @@ function App() {
       console.log('❌ handleWrongDrop: New score =', newScore);
       return newScore;
     });
-    showFeedback('Wrong! -5');
+    showFeedback(t('incorrect'));
     console.log('❌ handleWrongDrop: NOT generating new color (player can try again)');
     console.log('❌ handleWrongDrop: Done!');
   };
@@ -233,7 +252,7 @@ function App() {
     <div className="app">
       {/* Header */}
       <div className="header">
-        <h1>Color Sort Game</h1>
+        <h1>{t('title')}</h1>
         <div className="language-buttons">
           <button
             className={i18n.language === 'en' ? 'active' : ''}
@@ -253,18 +272,15 @@ function App() {
       {/* Instructions */}
       {!gameStarted && !gameOver && (
         <div className="instructions">
-          <h3>Simple Rules:</h3>
-          <p>🔴 RED color → Drag to LEFT side</p>
-          <p>🔵 BLUE color → Drag to RIGHT side</p>
-          <p>✅ Correct = +10 points | ❌ Wrong = -5 points</p>
+          <p>{t('instructions')}</p>
         </div>
       )}
 
       {/* Game Info */}
       {gameStarted && (
         <div className="game-info">
-          <div className="score">Score: {score}</div>
-          <div className="timer">Time: {timeLeft}s</div>
+          <div className="score">{t('score')}: {score}</div>
+          <div className="timer">{t('time')}: {timeLeft}s</div>
         </div>
       )}
 
@@ -280,12 +296,12 @@ function App() {
         <div className="middle-area">
           {gameStarted && currentColor ? (
             <div>
-              <p>Drag this color:</p>
+              <p>{t('dragColor')}</p>
               <ColorItem color={currentColor} />
             </div>
           ) : (
             <div className="placeholder">
-              Click Start Game!
+              {t('startGame')}!
             </div>
           )}
         </div>
@@ -300,17 +316,17 @@ function App() {
       {/* Start Button */}
       {!gameStarted && !gameOver && (
         <button className="start-button" onClick={startGame}>
-          Start Game
+          {t('startGame')}
         </button>
       )}
 
       {/* Game Over */}
       {gameOver && (
         <div className="game-over">
-          <h2>Game Over!</h2>
-          <p>Final Score: {score}</p>
+          <h2>{t('gameOver')}</h2>
+          <p>{t('finalScore')}: {score}</p>
           <button className="play-again-button" onClick={resetGame}>
-            Play Again
+            {t('playAgain')}
           </button>
         </div>
       )}
