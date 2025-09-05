@@ -4,10 +4,8 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 lerna-debug.log*
-
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Runtime data
 pids
@@ -31,13 +29,7 @@ coverage
 # Bower dependency directory (https://bower.io/)
 bower_components
 
-# node-waf configuration
-.lock-wscript
-
-# Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
-
-# Dependency directories
+# node_modules
 node_modules/
 jspm_packages/
 
@@ -56,6 +48,12 @@ web_modules/
 # Optional stylelint cache
 .stylelintcache
 
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
 # Optional REPL history
 .node_repl_history
 
@@ -67,8 +65,10 @@ web_modules/
 
 # dotenv environment variable files
 .env
-.env.*
-!.env.example
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -88,52 +88,75 @@ dist
 # https://nextjs.org/blog/next-9-1#public-directory-support
 # public
 
-# vuepress build output
-.vuepress/dist
+# Vite build output
+dist/
+dist-ssr/
 
-# vuepress v2.x temp and cache directory
-.temp
-.cache
+# Rollup build output
+build/
 
-# Sveltekit cache directory
-.svelte-kit/
+# Storybook build outputs
+.out
+.storybook-out
+storybook-static
 
-# vitepress build output
-**/.vitepress/dist
+# Temporary folders
+tmp/
+temp/
 
-# vitepress cache directory
-**/.vitepress/cache
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# Docusaurus cache and generated files
-.docusaurus
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
 
-# Serverless directories
-.serverless/
+# Local development
+.local
 
-# FuseBox cache
-.fusebox/
+# Vercel
+.vercel
 
-# DynamoDB Local files
-.dynamodb/
+# Netlify
+.netlify
 
-# Firebase cache directory
-.firebase/
+# Firebase
+.firebase
+firebase-debug.log
+firestore-debug.log
 
-# TernJS port file
-.tern-port
-
-# Stores VSCode versions used for testing VSCode extensions
-.vscode-test
-
-# yarn v3
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
-
-# Vite logs files
+# Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Test files
+coverage/
+.coverage/
+
+# Cypress
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Local Netlify folder
+.netlify
+
+# SvelteKit
+.svelte-kit
+
+# Turborepo
+.turbo
